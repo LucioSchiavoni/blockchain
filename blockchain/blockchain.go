@@ -24,7 +24,7 @@ func (bc *Blockchain) CreateBlock(nonce int, previousHash string) *block.Block {
 
 func (bc *Blockchain) Print() {
 	for i, block := range bc.chain {
-		fmt.Printf("Chain %d \n", i)
+		fmt.Printf("Chain %d\n", i)
 		block.Print()
 		fmt.Println()
 
