@@ -1,21 +1,21 @@
 package main
 
 import (
-	"fmt"
-
-	"github.com/LucioSchiavoni/blockchain/block"
 	"github.com/LucioSchiavoni/blockchain/blockchain"
 )
 
 func main() {
 
-	b := block.NewBlock(0, "init Hash")
-	b.Print()
-	fmt.Println("--------------")
-	bc := blockchain.NewBlockchain().CreateBlock(5, "hash 1")
-	bc.Print()
-	fmt.Println("--------------")
-	bc1 := blockchain.NewBlockchain().CreateBlock(2, "hash 2")
-	bc1.Print()
-	fmt.Println("--------------")
+	blockGenerate := blockchain.NewBlockchain()
+	blockGenerate.Print()
+
+	blockchain.NewBlockchain().AddTransaction("A", "B", 1.0)
+
+	previousHash := blockGenerate.LastBlock().Hash()
+	blockGenerate.CreateBlock(5, previousHash)
+	blockGenerate.Print()
+
+	previousHash = blockGenerate.LastBlock().Hash()
+	blockGenerate.CreateBlock(2, previousHash)
+	blockGenerate.Print()
 }
