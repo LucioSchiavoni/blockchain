@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"strings"
 	"time"
+
+	"github.com/google/s2a-go/retry"
 )
 
 type Block struct {
@@ -95,6 +97,16 @@ func (b *Block) Print() {
 func (bc *Blockchain) AddTransaction(sender string, recipient string, value float32) {
 	t := NewTransaction(sender, recipient, value)
 	bc.transactionPool = append(bc.transactionPool, t)
+}
+
+func (bc *Blockchain) CopyTransactionPool() []*Transaction{
+	transactions := make([]*Transaction, 0)
+	for _, t:= range bc.transactionPool{
+		transactions = append(transactions, 
+		NewTransaction(t.senderBlockchainAddress, t.recipientBlockchainAddress, t.value)
+		)
+	}
+	return transactions 
 }
 
 type Transaction struct {
